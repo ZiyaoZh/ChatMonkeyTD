@@ -25,7 +25,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("output/open_result.webp"),
+        default=Path("output/open_result.png"),
         help="拼图输出路径（仅 box_count<=50 时生效）",
     )
     parser.add_argument(
