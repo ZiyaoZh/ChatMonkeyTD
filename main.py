@@ -8,11 +8,13 @@ from btd6_sim.renderer import compose_drop_image
 from btd6_sim.report import build_markdown_report, build_text_report, write_markdown_report
 from btd6_sim.simulator import open_boxes
 
+MAX_BOX_COUNT = 10_000_000
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="BTD6 开箱子模拟器")
     parser.add_argument("box_type", choices=VALID_BOX_TYPES, help="箱子类型")
-    parser.add_argument("box_count", type=int, help="箱子数量（正整数）")
+    parser.add_argument("box_count", type=int, help=f"箱子数量（正整数，最大 {MAX_BOX_COUNT}）")
     parser.add_argument("--seed", type=int, default=None, help="随机种子，便于复现")
     parser.add_argument(
         "--assets-dir",
@@ -40,6 +42,8 @@ def main() -> None:
 
     if args.box_count <= 0:
         raise SystemExit("box_count 必须是正整数")
+    if args.box_count > MAX_BOX_COUNT:
+        raise SystemExit(f"box_count 不能大于 {MAX_BOX_COUNT}")
 
     if not args.assets_dir.exists():
         raise SystemExit(f"素材目录不存在: {args.assets_dir}")
