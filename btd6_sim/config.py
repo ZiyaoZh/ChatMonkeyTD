@@ -57,6 +57,7 @@ TOWER_POOL: List[str] = [
     "MortarMonkey",
     "NinjaMonkey",
     "SniperMonkey",
+    "Skywarden",
     "SpikeFactory",
     "SuperMonkey",
     "TackShooter",
